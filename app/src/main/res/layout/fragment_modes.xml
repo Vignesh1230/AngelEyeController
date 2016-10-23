@@ -1,0 +1,92 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#252525"
+    android:orientation="vertical">
+
+
+    <!--
+        <TextView
+            android:layout_below="@id/label"
+            android:layout_centerInParent="true"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center_horizontal"
+            android:text="Edit fragment_table.xml to change the appearance"
+            android:id="@+id/textView2" />
+            -->
+
+
+    <TabHost
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/tabHost"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TabWidget
+                android:id="@android:id/tabs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></TabWidget>
+
+            <FrameLayout
+                android:id="@android:id/tabcontent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:id="@+id/Mode1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:weightSum="1">
+
+                    <ImageButton
+                        android:layout_width="150dp"
+                        android:layout_height="100dp"
+                        android:id="@+id/modeCol1_1"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="10dp" />
+
+                    <ImageButton
+                        android:layout_width="150dp"
+                        android:layout_height="100dp"
+                        android:id="@+id/modeCol1_2"
+                        android:layout_marginLeft="210dp"
+                        android:layout_marginTop="-100dp" />
+
+                    <EditText
+                        android:layout_width="141dp"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal"
+                        android:ems="10"
+                        android:id="@+id/editText"
+                        android:layout_marginLeft="24dp"
+                        android:text="20"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/Mode2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"></LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/Mode3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"></LinearLayout>
+            </FrameLayout>
+        </LinearLayout>
+    </TabHost>
+</RelativeLayout>

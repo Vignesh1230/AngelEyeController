@@ -36,9 +36,9 @@ public class MainActivity extends AppCompatActivity {
 
         DataModel[] drawerItem = new DataModel[3];
 
-        drawerItem[0] = new DataModel(R.drawable.connect, "Connect");
-        drawerItem[1] = new DataModel(R.drawable.fixtures, "Fixtures");
-        drawerItem[2] = new DataModel(R.drawable.table, "Table");
+        drawerItem[0] = new DataModel(R.drawable.table, "Colour Mixer");
+        drawerItem[1] = new DataModel(R.drawable.connect, "Touch Changer");
+        drawerItem[2] = new DataModel(R.drawable.fixtures, "Modes");
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         getSupportActionBar().setHomeButtonEnabled(true);
 
@@ -67,13 +67,13 @@ public class MainActivity extends AppCompatActivity {
 
         switch (position) {
             case 0:
-                fragment = new ConnectFragment();
+                fragment = new TouchFragment();
                 break;
             case 1:
-                fragment = new FixturesFragment();
+                fragment = new MixerFragment();
                 break;
             case 2:
-                fragment = new TableFragment();
+                fragment = new ModesFragment();
                 break;
 
             default:

@@ -6,18 +6,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-/**
- * Created by anupamchugh on 10/12/15.
- */
-public class FixturesFragment extends Fragment {
 
-    public FixturesFragment() {
+
+public class TouchFragment extends Fragment {
+
+    public TouchFragment() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.fragment_fixtures, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_touch, container, false);
 
         return rootView;
     }

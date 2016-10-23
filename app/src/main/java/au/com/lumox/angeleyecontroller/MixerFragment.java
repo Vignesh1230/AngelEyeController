@@ -9,15 +9,15 @@ import android.view.ViewGroup;
 /**
  * Created by anupamchugh on 10/12/15.
  */
-public class TableFragment extends Fragment {
+public class MixerFragment extends Fragment {
 
-    public TableFragment() {
+    public MixerFragment() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.fragment_table, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_mixer, container, false);
 
         return rootView;
     }

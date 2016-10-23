@@ -9,15 +9,15 @@ import android.view.ViewGroup;
 /**
  * Created by anupamchugh on 10/12/15.
  */
-public class ConnectFragment extends Fragment {
+public class ModesFragment extends Fragment {
 
-    public ConnectFragment() {
+    public ModesFragment() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.fragment_connect, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_modes, container, false);
 
         return rootView;
     }
