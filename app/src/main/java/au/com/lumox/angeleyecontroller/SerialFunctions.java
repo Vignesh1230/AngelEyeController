@@ -77,7 +77,7 @@ public class SerialFunctions extends Service {
         @Override
         public void run() {
             try {
-                socket = new Socket("192.168.4.1",23);
+                socket = new Socket(getString(R.string.ESP_IP_Address),23);
                 out = new DataOutputStream(socket.getOutputStream());
             } catch (IOException e) {
                 e.printStackTrace();

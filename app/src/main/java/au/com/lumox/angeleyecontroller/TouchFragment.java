@@ -27,9 +27,11 @@ public class TouchFragment extends Fragment {
 
 
 
-
     public TouchFragment() {
     }
+
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -39,7 +41,7 @@ public class TouchFragment extends Fragment {
 
         touchControl = (ImageView) rootView.findViewById(R.id.touchControl);
         RGBColorView2 = (ImageView)  rootView.findViewById(R.id.RGBColorView2);
-        rgbVals = (TextView) rootView.findViewById(R.id.label);
+        rgbVals = (TextView) rootView.findViewById(R.id.labelConnection);
 
 
         touchControl.setOnTouchListener(new ImageView.OnTouchListener() {
@@ -70,7 +72,7 @@ public class TouchFragment extends Fragment {
                             RGBColorView2.setBackgroundColor(Color.rgb(redValue, greenValue, blueValue));
                             rgbVals.setText("Red: "+ redValue + " Green: " + greenValue + " Blue: " + blueValue);
 
-                            //mCallback.fingerWasTouchedOnScreen(redValue,greenValue,blueValue,100);
+                            //mCallback.screenTouchValues(redValue,greenValue,blueValue,100);
 
 
                         }
