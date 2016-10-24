@@ -7,7 +7,7 @@
 
 
     <TextView
-        android:id="@+id/label"
+        android:id="@+id/labelTouch"
         android:layout_alignParentTop="true"
         android:layout_marginTop="10dp"
         android:layout_width="fill_parent"
@@ -30,7 +30,7 @@
         android:layout_width="fill_parent"
         android:layout_height="70dp"
         android:id="@+id/RGBColorView2"
-        android:layout_below="@+id/label"
+        android:layout_below="@+id/labelTouch"
         android:layout_alignParentStart="true"
         android:layout_marginTop="40dp"/>
 
@@ -40,8 +40,8 @@
         android:text="Connection Status:"
         android:textAlignment="center"
         android:textSize="20dp"
-        android:id="@+id/rgbVal"
-        android:layout_below="@+id/label"
+        android:id="@+id/labelConnection"
+        android:layout_below="@+id/labelTouch"
         android:layout_alignStart="@+id/touchControl"
         android:layout_marginStart="20dp"
         android:layout_marginTop="11dp" />

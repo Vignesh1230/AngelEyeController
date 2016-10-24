@@ -1,0 +1,78 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#252525"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:id="@+id/labelSettings"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="10dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:textSize="45sp"
+        android:text="Settings"
+        android:textStyle="bold"/>
+
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="WiFi SSID:"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:id="@+id/textViewSSID"
+        android:layout_marginTop="42sp"
+        android:layout_below="@+id/labelSettings"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="19sp" />
+
+
+
+    <Button
+        android:text="Save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/saveBtn"
+        android:layout_marginTop="16dp"
+        android:layout_below="@+id/editPassText"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="WiFi Pass:"
+        android:textAlignment="textStart"
+        android:textSize="20dp"
+        android:id="@+id/textView4"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/textViewSSID"
+        android:layout_alignStart="@+id/textViewSSID" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:hint="SSID"
+        android:ems="10"
+        android:id="@+id/editSSIDText"
+        android:layout_alignBaseline="@+id/textViewSSID"
+        android:layout_alignBottom="@+id/textViewSSID"
+        android:layout_alignStart="@+id/editPassText" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:hint="Password"
+        android:ems="10"
+        android:id="@+id/editPassText"
+        android:layout_alignBaseline="@+id/textView4"
+        android:layout_alignBottom="@+id/textView4"
+        android:layout_marginLeft="120dp" />
+
+
+</RelativeLayout>

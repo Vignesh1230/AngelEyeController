@@ -39,7 +39,7 @@ public class TouchFragment extends Fragment {
 
         touchControl = (ImageView) rootView.findViewById(R.id.touchControl);
         RGBColorView2 = (ImageView)  rootView.findViewById(R.id.RGBColorView2);
-        rgbVals = (TextView) rootView.findViewById(R.id.rgbVal);
+        rgbVals = (TextView) rootView.findViewById(R.id.label);
 
 
         touchControl.setOnTouchListener(new ImageView.OnTouchListener() {

@@ -34,11 +34,12 @@ public class MainActivity extends AppCompatActivity {
 
         setupToolbar();
 
-        DataModel[] drawerItem = new DataModel[3];
+        DataModel[] drawerItem = new DataModel[4];
 
-        drawerItem[0] = new DataModel(R.drawable.table, "Touch Changer");
-        drawerItem[1] = new DataModel(R.drawable.connect, "Color Mixer");
+        drawerItem[0] = new DataModel(R.drawable.connect, "Touch Changer");
+        drawerItem[1] = new DataModel(R.drawable.table, "Color Mixer");
         drawerItem[2] = new DataModel(R.drawable.fixtures, "Modes");
+        drawerItem[3] = new DataModel(R.drawable.table, "Settings");
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         getSupportActionBar().setHomeButtonEnabled(true);
 
@@ -74,6 +75,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case 2:
                 fragment = new ModesFragment();
+                break;
+            case 3:
+                fragment = new SettingsFragment();
                 break;
 
             default:
