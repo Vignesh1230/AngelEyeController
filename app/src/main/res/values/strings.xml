@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BMW Angels</string>
+    <string name="app_name">BMW Lights</string>
 
     <string name="action_settings">Settings</string>
     <string name="drawer_open">Open Navigation</string>
@@ -7,8 +7,8 @@
 
 
     <string-array name="navigation_drawer_items_array">
-        <item>Color Mixer</item>
         <item>Touch Changer</item>
+        <item>Color Mixer</item>
         <item>Modes</item>
     </string-array>
 </resources>

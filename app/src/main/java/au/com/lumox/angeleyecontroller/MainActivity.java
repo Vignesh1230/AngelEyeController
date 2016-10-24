@@ -36,8 +36,8 @@ public class MainActivity extends AppCompatActivity {
 
         DataModel[] drawerItem = new DataModel[3];
 
-        drawerItem[0] = new DataModel(R.drawable.table, "Colour Mixer");
-        drawerItem[1] = new DataModel(R.drawable.connect, "Touch Changer");
+        drawerItem[0] = new DataModel(R.drawable.table, "Touch Changer");
+        drawerItem[1] = new DataModel(R.drawable.connect, "Color Mixer");
         drawerItem[2] = new DataModel(R.drawable.fixtures, "Modes");
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         getSupportActionBar().setHomeButtonEnabled(true);

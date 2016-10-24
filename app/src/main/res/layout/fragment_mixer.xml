@@ -57,12 +57,12 @@
         android:layout_height="wrap_content"
         android:id="@+id/seekBarBrightness"
         android:indeterminate="false"
-        android:max="100"
+        android:max="255"
         android:layout_marginTop="60dp"
         android:layout_below="@+id/seekBarBlue"
         android:layout_alignLeft="@+id/seekBarGreen"
         android:layout_alignStart="@+id/seekBarGreen"
-        android:progress="50" />
+        android:progress="255" />
 
     <ImageView
         android:layout_width="600dp"
