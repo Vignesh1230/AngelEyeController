@@ -3,6 +3,7 @@ package au.com.lumox.angeleyecontroller;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.MainThread;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -65,6 +66,7 @@ public class MixerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fragment_mixer, container, false);
+
 
 
         seekBarRedish = (SeekBar) rootView.findViewById(R.id.seekBarRed);
