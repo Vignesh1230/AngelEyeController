@@ -17,7 +17,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity implements MixerFragment.ValuesChanged{
 
     private String[] mNavigationDrawerItemTitles;
     private DrawerLayout mDrawerLayout;
@@ -57,6 +57,11 @@ public class MainActivity extends AppCompatActivity{
         setupDrawerToggle();
 
 
+    }
+
+    @Override
+    public void SendMessage(int red,int green,int blue,int brightness ){
+        Toast.makeText(getApplicationContext(), "Interface Worked", Toast.LENGTH_SHORT).show();
     }
 
     private class DrawerItemClickListener implements ListView.OnItemClickListener {

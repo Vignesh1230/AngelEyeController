@@ -34,6 +34,32 @@ public class MixerFragment extends Fragment {
     public MixerFragment() {
     }
 
+    ValuesChanged mCallback;
+
+    // Container Activity must implement this interface
+    public interface ValuesChanged {
+        public void SendMessage(int red,int green,int blue,int brightness );
+    }
+
+
+
+
+    public void onAttach(MainActivity activity) {
+        super.onAttach(activity);
+
+        // This makes sure that the container activity has implemented
+        // the callback interface. If not, it throws an exception
+        try {
+            mCallback = (ValuesChanged) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement OnHeadlineSelectedListener");
+        }
+    }
+
+
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -54,13 +80,16 @@ public class MixerFragment extends Fragment {
         seekBarRedish.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
 
+
+
+
             @Override
             public void onProgressChanged(SeekBar seekBar, int progressR, boolean fromUser) {
                 redValue = progressR;
-                RGBColorView.setBackgroundColor(Color.rgb(redValue, greenValue, blueValue));
+                RGBColorView.setBackgroundColor(Color.argb(brightnessValue,redValue, greenValue, blueValue ));
                 textViewRed.setText("Red Val: " + redValue);
                 //Toast.makeText(getApplicationContext(), "Changing seekbar's progress", Toast.LENGTH_SHORT).show();
-
+                mCallback.SendMessage(redValue,greenValue,blueValue,brightnessValue);
 
 
             }
@@ -88,7 +117,7 @@ public class MixerFragment extends Fragment {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progressB, boolean fromUser) {
                 blueValue = progressB;
-                RGBColorView.setBackgroundColor(Color.rgb(redValue, greenValue, blueValue));
+                RGBColorView.setBackgroundColor(Color.argb(brightnessValue,redValue, greenValue, blueValue ));
                 textViewBlue.setText("Blue Val: " + blueValue);
                 //Toast.makeText(getApplicationContext(), "Changing seekbar's progress", Toast.LENGTH_SHORT).show();
 
@@ -114,7 +143,7 @@ public class MixerFragment extends Fragment {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progressG, boolean fromUser) {
                 greenValue = progressG;
-                RGBColorView.setBackgroundColor(Color.rgb(redValue, greenValue, blueValue));
+                RGBColorView.setBackgroundColor(Color.argb(brightnessValue,redValue, greenValue, blueValue ));
                 textViewGreen.setText("Green Val: " + greenValue);
                 //Toast.makeText(getApplicationContext(), "Changing seekbar's progress", Toast.LENGTH_SHORT).show();
 
