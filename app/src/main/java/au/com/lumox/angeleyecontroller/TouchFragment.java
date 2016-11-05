@@ -1,5 +1,6 @@
 package au.com.lumox.angeleyecontroller;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
@@ -23,6 +24,31 @@ public class TouchFragment extends Fragment {
     private ImageView touchControl;
     private ImageView RGBColorView2;
     private TextView rgbVals;
+
+
+
+    TouchValuesChanged mCallback;
+
+    // Container Activity must implement this interface
+    public interface TouchValuesChanged {
+        public void SendMessage(int red,int green,int blue,int brightness);
+    }
+
+
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        // This makes sure that the container activity has implemented
+        // the callback interface. If not, it throws an exception
+        try {
+            mCallback = (TouchValuesChanged) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString()
+                    + " must implement ValuesChanged");
+        }
+    }
 
 
 
@@ -72,7 +98,7 @@ public class TouchFragment extends Fragment {
                             RGBColorView2.setBackgroundColor(Color.rgb(redValue, greenValue, blueValue));
                             rgbVals.setText("Red: "+ redValue + " Green: " + greenValue + " Blue: " + blueValue);
 
-                            //mCallback.screenTouchValues(redValue,greenValue,blueValue,100);
+                            mCallback.SendMessage(redValue,greenValue,blueValue,100);
 
 
                         }

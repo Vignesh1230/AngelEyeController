@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements MixerFragment.Val
     }
 
     @Override
-    public void SendMessage(int red,int green,int blue,int brightness ){
+    public void SendMessage(int red ,int green, int blue, int brightness ){
         Toast.makeText(getApplicationContext(), "Interface Worked", Toast.LENGTH_SHORT).show();
     }
 
@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity implements MixerFragment.Val
 
         if (fragment != null) {
             FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+            fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).addToBackStack(null).commit();
 
             mDrawerList.setItemChecked(position, true);
             mDrawerList.setSelection(position);

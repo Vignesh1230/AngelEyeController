@@ -1,5 +1,6 @@
 package au.com.lumox.angeleyecontroller;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -38,22 +39,22 @@ public class MixerFragment extends Fragment {
 
     // Container Activity must implement this interface
     public interface ValuesChanged {
-        public void SendMessage(int red,int green,int blue,int brightness );
+        public void SendMessage(int red,int green,int blue,int brightness);
     }
 
 
 
-
-    public void onAttach(MainActivity activity) {
-        super.onAttach(activity);
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
 
         // This makes sure that the container activity has implemented
         // the callback interface. If not, it throws an exception
         try {
-            mCallback = (ValuesChanged) activity;
+            mCallback = (ValuesChanged) context;
         } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnHeadlineSelectedListener");
+            throw new ClassCastException(context.toString()
+                    + " must implement ValuesChanged");
         }
     }
 
@@ -120,6 +121,7 @@ public class MixerFragment extends Fragment {
                 RGBColorView.setBackgroundColor(Color.argb(brightnessValue,redValue, greenValue, blueValue ));
                 textViewBlue.setText("Blue Val: " + blueValue);
                 //Toast.makeText(getApplicationContext(), "Changing seekbar's progress", Toast.LENGTH_SHORT).show();
+                mCallback.SendMessage(redValue,greenValue,blueValue,brightnessValue);
 
 
             }
@@ -146,6 +148,7 @@ public class MixerFragment extends Fragment {
                 RGBColorView.setBackgroundColor(Color.argb(brightnessValue,redValue, greenValue, blueValue ));
                 textViewGreen.setText("Green Val: " + greenValue);
                 //Toast.makeText(getApplicationContext(), "Changing seekbar's progress", Toast.LENGTH_SHORT).show();
+                mCallback.SendMessage(redValue,greenValue,blueValue,brightnessValue);
 
 
             }
@@ -176,6 +179,7 @@ public class MixerFragment extends Fragment {
                 textViewBrightness.setText("Brightness: " + brightnessValue);
 
                 //Toast.makeText(getApplicationContext(), "Changing seekbar's progress", Toast.LENGTH_SHORT).show();
+                mCallback.SendMessage(redValue,greenValue,blueValue,brightnessValue);
 
 
             }
