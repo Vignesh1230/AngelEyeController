@@ -5,7 +5,11 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.SharedPreferences;
+import android.net.wifi.WifiConfiguration;
+import android.net.wifi.WifiManager;
 import android.os.IBinder;
+import android.os.StrictMode;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
@@ -13,11 +17,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements MixerFragment.ValuesChanged, TouchFragment.TouchValuesChanged{
 
@@ -27,9 +35,42 @@ public class MainActivity extends AppCompatActivity implements MixerFragment.Val
     Toolbar toolbar;
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
+    public boolean WifiToggle = false;
     android.support.v7.app.ActionBarDrawerToggle mDrawerToggle;
 
     String messageToSend;
+
+
+    SerialFunctions messageService;
+
+    boolean isBound = false;
+
+    ServiceConnection myConnection  = new ServiceConnection() {
+
+        public void onServiceConnected(ComponentName className,
+                IBinder service) {
+            SerialFunctions.MyLocalBinder binder = (SerialFunctions.MyLocalBinder) service;
+            messageService = binder.getService();
+            isBound = true;
+        }
+
+    public void onServiceDisconnected(ComponentName arg0) {
+        isBound = false;
+    }
+
+};;
+
+
+
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,9 +83,7 @@ public class MainActivity extends AppCompatActivity implements MixerFragment.Val
 
         setupToolbar();
 
-        //SERIAL STUFF DECLARING
-        Intent intent = new Intent(this, SerialFunctions.class);
-        bindService(intent, myConnection, Context.BIND_AUTO_CREATE);
+
 
 
         DataModel[] drawerItem = new DataModel[4];
@@ -64,15 +103,24 @@ public class MainActivity extends AppCompatActivity implements MixerFragment.Val
         setupDrawerToggle();
 
 
+        //SERIAL STUFF DECLARING
+        Intent intent = new Intent(this, SerialFunctions.class);
+        bindService(intent, myConnection, Context.BIND_AUTO_CREATE);
+
+
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
     }
 
     @Override
-    public void SendMessage(int red ,int green, int blue, int brightness ){
-        Toast.makeText(getApplicationContext(), "Interface Worked", Toast.LENGTH_SHORT).show();
+    public void SendMessage(final String messageToSend){
 
-
-        messageToSend = "0," + red + "," + green + "," + blue + "," + brightness;
-        messageService.transmitMessage(messageToSend);
+        new Thread(new Runnable() {
+            public void run() {
+                messageService.transmitMessage(messageToSend);
+            }
+        }).start();
 
     }
 
@@ -125,11 +173,73 @@ public class MainActivity extends AppCompatActivity implements MixerFragment.Val
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        if (mDrawerToggle.onOptionsItemSelected(item)) {
-            return true;
+
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+
+                WifiManager wifiManager = (WifiManager)this.getSystemService(Context.WIFI_SERVICE);
+
+                if (!WifiToggle) {
+
+                    //startActivity(new Intent(WifiManager.ACTION_PICK_WIFI_NETWORK));
+                    Toast.makeText(getApplicationContext(), "Connect to Headlights.", Toast.LENGTH_SHORT).show();
+
+                    SharedPreferences prefs = getSharedPreferences("WifiPrefs", MODE_PRIVATE);
+                    String SSID = prefs.getString("SSIDKey", "BMW");
+                    //String wPass = prefs.getString("PassKey", null);
+
+
+                    WifiConfiguration conf = new WifiConfiguration();
+                    conf.SSID = "\"" + SSID + "\"";
+
+                    conf.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.NONE);
+
+                    wifiManager.addNetwork(conf);
+
+                    List<WifiConfiguration> list = wifiManager.getConfiguredNetworks();
+                    for( WifiConfiguration i : list ) {
+                        if(i.SSID != null && i.SSID.equals("\"" + SSID + "\"")) {
+                            wifiManager.disconnect();
+                            wifiManager.enableNetwork(i.networkId, true);
+                            wifiManager.reconnect();
+
+                            break;
+                        }
+                    }
+
+
+
+
+
+
+
+
+
+
+                    WifiToggle = !WifiToggle;
+
+
+                } else {
+                    Toast.makeText(getApplicationContext(), "Disconnecting.", Toast.LENGTH_SHORT).show();
+                    //Disconnect from Hardware
+
+
+
+                    wifiManager.disconnect(); // Disconnect From Wifi
+
+                    WifiToggle = !WifiToggle;
+
+
+                }
+
+            default:
+                if (mDrawerToggle.onOptionsItemSelected(item)) {
+                    return true;
+                }
+                return super.onOptionsItemSelected(item);
         }
 
-        return super.onOptionsItemSelected(item);
+
     }
 
     @Override
@@ -148,7 +258,9 @@ public class MainActivity extends AppCompatActivity implements MixerFragment.Val
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+
     }
+
 
     void setupDrawerToggle(){
         mDrawerToggle = new android.support.v7.app.ActionBarDrawerToggle(this,mDrawerLayout,toolbar,R.string.app_name, R.string.app_name);
@@ -159,23 +271,7 @@ public class MainActivity extends AppCompatActivity implements MixerFragment.Val
 
 
 
-    SerialFunctions messageService;
-    boolean isBound = false;
 
-    private ServiceConnection myConnection = new ServiceConnection() {
-
-        public void onServiceConnected(ComponentName className,
-                                       IBinder service) {
-            SerialFunctions.MyLocalBinder binder = (SerialFunctions.MyLocalBinder) service;
-            messageService = binder.getService();
-            isBound = true;
-        }
-
-        public void onServiceDisconnected(ComponentName arg0) {
-            isBound = false;
-        }
-
-    };
 
 
 

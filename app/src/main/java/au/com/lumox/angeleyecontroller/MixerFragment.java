@@ -40,7 +40,7 @@ public class MixerFragment extends Fragment {
 
     // Container Activity must implement this interface
     public interface ValuesChanged {
-        public void SendMessage(int red,int green,int blue,int brightness);
+        public void SendMessage(String messageToSend);
     }
 
 
@@ -90,9 +90,10 @@ public class MixerFragment extends Fragment {
             public void onProgressChanged(SeekBar seekBar, int progressR, boolean fromUser) {
                 redValue = progressR;
                 RGBColorView.setBackgroundColor(Color.argb(brightnessValue,redValue, greenValue, blueValue ));
+                brightnessValue = Math.round ((((float) brightnessValue) / 255) * 100);
                 textViewRed.setText("Red Val: " + redValue);
-                //Toast.makeText(getApplicationContext(), "Changing seekbar's progress", Toast.LENGTH_SHORT).show();
-                mCallback.SendMessage(redValue,greenValue,blueValue,brightnessValue);
+
+                mCallback.SendMessage("0," + redValue + "," + greenValue + "," + blueValue + "," + brightnessValue + "\n");
 
 
             }
@@ -121,9 +122,10 @@ public class MixerFragment extends Fragment {
             public void onProgressChanged(SeekBar seekBar, int progressB, boolean fromUser) {
                 blueValue = progressB;
                 RGBColorView.setBackgroundColor(Color.argb(brightnessValue,redValue, greenValue, blueValue ));
+                brightnessValue = Math.round ((((float) brightnessValue) / 255) * 100);
                 textViewBlue.setText("Blue Val: " + blueValue);
-                //Toast.makeText(getApplicationContext(), "Changing seekbar's progress", Toast.LENGTH_SHORT).show();
-                mCallback.SendMessage(redValue,greenValue,blueValue,brightnessValue);
+
+                mCallback.SendMessage("0," + redValue + "," + greenValue + "," + blueValue + "," + brightnessValue + "\n");
 
 
             }
@@ -148,9 +150,10 @@ public class MixerFragment extends Fragment {
             public void onProgressChanged(SeekBar seekBar, int progressG, boolean fromUser) {
                 greenValue = progressG;
                 RGBColorView.setBackgroundColor(Color.argb(brightnessValue,redValue, greenValue, blueValue ));
+                brightnessValue = Math.round ((((float) brightnessValue) / 255) * 100);
                 textViewGreen.setText("Green Val: " + greenValue);
-                //Toast.makeText(getApplicationContext(), "Changing seekbar's progress", Toast.LENGTH_SHORT).show();
-                mCallback.SendMessage(redValue,greenValue,blueValue,brightnessValue);
+
+                mCallback.SendMessage("0," + redValue + "," + greenValue + "," + blueValue + "," + brightnessValue + "\n");
 
 
             }
@@ -180,8 +183,9 @@ public class MixerFragment extends Fragment {
 
                 textViewBrightness.setText("Brightness: " + brightnessValue);
 
-                //Toast.makeText(getApplicationContext(), "Changing seekbar's progress", Toast.LENGTH_SHORT).show();
-                mCallback.SendMessage(redValue,greenValue,blueValue,brightnessValue);
+                mCallback.SendMessage("0," + redValue + "," + greenValue + "," + blueValue + "," + brightnessValue + "\n");
+
+
 
 
             }

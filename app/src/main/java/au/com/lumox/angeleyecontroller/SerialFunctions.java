@@ -58,7 +58,6 @@ public class SerialFunctions extends Service {
         // Toast.makeText(SomeTest.this, message, Toast.LENGTH_SHORT).show();
         try {
             out.writeBytes(message);
-            out.flush();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -78,7 +77,10 @@ public class SerialFunctions extends Service {
         public void run() {
             try {
                 socket = new Socket(getString(R.string.ESP_IP_Address),23);
+                socket.setTcpNoDelay(true);
+                //socket.setPerformancePreferences(0,6,2);
                 out = new DataOutputStream(socket.getOutputStream());
+
             } catch (IOException e) {
                 e.printStackTrace();
             }

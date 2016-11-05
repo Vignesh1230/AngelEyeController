@@ -52,18 +52,6 @@
         android:layout_alignStart="@+id/seekBarGreen"
         android:layout_marginTop="60dp" />
 
-    <SeekBar
-        android:layout_width="270dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/seekBarBrightness"
-        android:indeterminate="false"
-        android:max="255"
-        android:layout_marginTop="60dp"
-        android:layout_below="@+id/seekBarBlue"
-        android:layout_alignLeft="@+id/seekBarGreen"
-        android:layout_alignStart="@+id/seekBarGreen"
-        android:progress="255" />
-
     <ImageView
         android:layout_width="600dp"
         android:layout_height="100dp"
@@ -109,12 +97,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Brightness: 0"
+        android:text="Brightness: 100"
         android:id="@+id/textViewBrightness"
         android:layout_alignTop="@+id/seekBarBrightness"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginLeft="10dp"/>
+
+    <SeekBar
+        android:layout_width="270dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/seekBarBrightness"
+        android:indeterminate="false"
+        android:max="255"
+        android:layout_marginTop="56dp"
+        android:progress="255"
+        android:layout_below="@+id/textViewGreen"
+        android:layout_alignParentEnd="true" />
 
 
 </RelativeLayout>

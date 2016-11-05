@@ -31,7 +31,7 @@ public class TouchFragment extends Fragment {
 
     // Container Activity must implement this interface
     public interface TouchValuesChanged {
-        public void SendMessage(int red,int green,int blue,int brightness);
+        public void SendMessage(String messageToSend);
     }
 
 
@@ -70,40 +70,71 @@ public class TouchFragment extends Fragment {
         rgbVals = (TextView) rootView.findViewById(R.id.labelConnection);
 
 
+        final Bitmap bitmap;
+        bitmap = ((BitmapDrawable)touchControl.getDrawable()).getBitmap();
+
+
+
+
         touchControl.setOnTouchListener(new ImageView.OnTouchListener() {
 
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                int x = (int)event.getX();
-                int y = (int)event.getY();
+            public boolean onTouch(final View v, final MotionEvent event) {
+
+                final int x = (int)event.getX();
+                final int y = (int)event.getY();
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
                     case MotionEvent.ACTION_MOVE:
                     case MotionEvent.ACTION_UP:
                 }
 
-                ImageView touchControl = ((ImageView)v);
-
-                Bitmap bitmap;
-                bitmap = ((BitmapDrawable)touchControl.getDrawable()).getBitmap();
 
 
-                if (y< bitmap.getHeight() && y>=0) {
-                    if ( x >= 0 && x < bitmap.getWidth()) {
-                        int pixel = bitmap.getPixel(x, y);
-                        int redValue = Color.red(pixel);
-                        int blueValue = Color.blue(pixel);
-                        int greenValue = Color.green(pixel);
-                        if (redValue!=0 && blueValue !=0 && greenValue!=0) {
-                            RGBColorView2.setBackgroundColor(Color.rgb(redValue, greenValue, blueValue));
-                            rgbVals.setText("Red: "+ redValue + " Green: " + greenValue + " Blue: " + blueValue);
+                new Thread(new Runnable() {
+                    public void run() {
 
-                            mCallback.SendMessage(redValue,greenValue,blueValue,100);
+                        if (y< bitmap.getHeight() && y>=0) {
+                            if ( x >= 0 && x < bitmap.getWidth()) {
+                                int pixel = bitmap.getPixel(x, y);
+                                final int redValue = Color.red(pixel);
+                                final int blueValue = Color.blue(pixel);
+                                final int greenValue = Color.green(pixel);
+                                if (redValue!=0 && blueValue !=0 && greenValue!=0) {
+                                    mCallback.SendMessage("0," + redValue + "," + greenValue + "," + blueValue + "," + 100 + "\n");
+                                }
+
+                                //TEST
+                                RGBColorView2.post(new Runnable() {
+                                    public void run() {
+                                        RGBColorView2.setBackgroundColor(Color.rgb(redValue, greenValue, blueValue));
+                                    }
+                                });
+
+                                rgbVals.post(new Runnable() {
+                                    public void run() {
+                                        rgbVals.setText("Red: "+ redValue + " Green: " + greenValue + " Blue: " + blueValue);
+                                    }
+                                });
+
+                                //TEST
 
 
+                            }
+                        }
+
+                        try {
+                            Thread.sleep(20);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
                         }
                     }
-                }
+
+                }).start();
+
+                //RGBColorView2.setBackgroundColor(Color.rgb(redValue, greenValue, blueValue));
+                //rgbVals.setText("Red: "+ redValue + " Green: " + greenValue + " Blue: " + blueValue);
+
                 return true;
             }
         });
