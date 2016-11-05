@@ -2,6 +2,7 @@
     <string name="app_name">BMW Lights</string>
 
     <string name="action_settings">Settings</string>
+    <string name="connect_String">Connect/Disconnect</string>
     <string name="drawer_open">Open Navigation</string>
     <string name="drawer_close">Close Navigation</string>
     <string name="custom_settings">prefs</string>

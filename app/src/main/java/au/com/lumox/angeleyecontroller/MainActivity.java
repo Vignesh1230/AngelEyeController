@@ -2,6 +2,8 @@ package au.com.lumox.angeleyecontroller;
 
 
 import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.IBinder;
 import android.support.v4.app.Fragment;
@@ -17,7 +19,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity implements MixerFragment.ValuesChanged{
+public class MainActivity extends AppCompatActivity implements MixerFragment.ValuesChanged, TouchFragment.TouchValuesChanged{
 
     private String[] mNavigationDrawerItemTitles;
     private DrawerLayout mDrawerLayout;
@@ -39,6 +41,11 @@ public class MainActivity extends AppCompatActivity implements MixerFragment.Val
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
 
         setupToolbar();
+
+        //SERIAL STUFF DECLARING
+        Intent intent = new Intent(this, SerialFunctions.class);
+        bindService(intent, myConnection, Context.BIND_AUTO_CREATE);
+
 
         DataModel[] drawerItem = new DataModel[4];
 
@@ -62,6 +69,11 @@ public class MainActivity extends AppCompatActivity implements MixerFragment.Val
     @Override
     public void SendMessage(int red ,int green, int blue, int brightness ){
         Toast.makeText(getApplicationContext(), "Interface Worked", Toast.LENGTH_SHORT).show();
+
+
+        messageToSend = "0," + red + "," + green + "," + blue + "," + brightness;
+        messageService.transmitMessage(messageToSend);
+
     }
 
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
@@ -98,6 +110,7 @@ public class MainActivity extends AppCompatActivity implements MixerFragment.Val
         if (fragment != null) {
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).addToBackStack(null).commit();
+            //fragmentManager.beginTransaction().add(fragment,"Fragment").addToBackStack(null).commit();
 
             mDrawerList.setItemChecked(position, true);
             mDrawerList.setSelection(position);

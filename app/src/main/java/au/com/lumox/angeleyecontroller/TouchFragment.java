@@ -46,7 +46,7 @@ public class TouchFragment extends Fragment {
             mCallback = (TouchValuesChanged) context;
         } catch (ClassCastException e) {
             throw new ClassCastException(context.toString()
-                    + " must implement ValuesChanged");
+                    + " must implement TouchValuesChanged");
         }
     }
 

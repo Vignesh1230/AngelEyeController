@@ -54,7 +54,7 @@ public class SerialFunctions extends Service {
     }
 
 
-    public void sendAMessage(String message){
+    public void transmitMessage(String message){
         // Toast.makeText(SomeTest.this, message, Toast.LENGTH_SHORT).show();
         try {
             out.writeBytes(message);
