@@ -101,10 +101,10 @@ public class TouchFragment extends Fragment {
                                 final int blueValue = Color.blue(pixel);
                                 final int greenValue = Color.green(pixel);
                                 if (redValue!=0 && blueValue !=0 && greenValue!=0) {
-                                    mCallback.SendMessage("0," + redValue + "," + greenValue + "," + blueValue + "," + 100 + "\n");
+                                        mCallback.SendMessage("1," + redValue + "," + greenValue + "," + blueValue + "," + 100 + "\n");
                                 }
 
-                                //TEST
+                                //Changes UI in a background thread within worker thread.
                                 RGBColorView2.post(new Runnable() {
                                     public void run() {
                                         RGBColorView2.setBackgroundColor(Color.rgb(redValue, greenValue, blueValue));
@@ -117,7 +117,7 @@ public class TouchFragment extends Fragment {
                                     }
                                 });
 
-                                //TEST
+
 
 
                             }
@@ -131,9 +131,6 @@ public class TouchFragment extends Fragment {
                     }
 
                 }).start();
-
-                //RGBColorView2.setBackgroundColor(Color.rgb(redValue, greenValue, blueValue));
-                //rgbVals.setText("Red: "+ redValue + " Green: " + greenValue + " Blue: " + blueValue);
 
                 return true;
             }

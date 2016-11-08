@@ -38,11 +38,9 @@ public class MainActivity extends AppCompatActivity implements MixerFragment.Val
     public boolean WifiToggle = false;
     android.support.v7.app.ActionBarDrawerToggle mDrawerToggle;
 
-    String messageToSend;
 
 
     SerialFunctions messageService;
-
     boolean isBound = false;
 
     ServiceConnection myConnection  = new ServiceConnection() {
@@ -58,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements MixerFragment.Val
         isBound = false;
     }
 
-};;
+};
 
 
 
@@ -84,6 +82,9 @@ public class MainActivity extends AppCompatActivity implements MixerFragment.Val
         setupToolbar();
 
 
+        final Intent intent = new Intent(this, SerialFunctions.class);
+
+        bindService(intent, myConnection, Context.BIND_AUTO_CREATE);
 
 
         DataModel[] drawerItem = new DataModel[4];
@@ -103,9 +104,7 @@ public class MainActivity extends AppCompatActivity implements MixerFragment.Val
         setupDrawerToggle();
 
 
-        //SERIAL STUFF DECLARING
-        Intent intent = new Intent(this, SerialFunctions.class);
-        bindService(intent, myConnection, Context.BIND_AUTO_CREATE);
+
 
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -206,11 +205,6 @@ public class MainActivity extends AppCompatActivity implements MixerFragment.Val
                             break;
                         }
                     }
-
-
-
-
-
 
 
 

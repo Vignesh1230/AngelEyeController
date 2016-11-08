@@ -93,7 +93,7 @@ public class MixerFragment extends Fragment {
                 brightnessValue = Math.round ((((float) brightnessValue) / 255) * 100);
                 textViewRed.setText("Red Val: " + redValue);
 
-                mCallback.SendMessage("0," + redValue + "," + greenValue + "," + blueValue + "," + brightnessValue + "\n");
+                mCallback.SendMessage("1," + redValue + "," + greenValue + "," + blueValue + "," + brightnessValue + "\n");
 
 
             }
@@ -125,7 +125,7 @@ public class MixerFragment extends Fragment {
                 brightnessValue = Math.round ((((float) brightnessValue) / 255) * 100);
                 textViewBlue.setText("Blue Val: " + blueValue);
 
-                mCallback.SendMessage("0," + redValue + "," + greenValue + "," + blueValue + "," + brightnessValue + "\n");
+                mCallback.SendMessage("1," + redValue + "," + greenValue + "," + blueValue + "," + brightnessValue + "\n");
 
 
             }
@@ -153,7 +153,7 @@ public class MixerFragment extends Fragment {
                 brightnessValue = Math.round ((((float) brightnessValue) / 255) * 100);
                 textViewGreen.setText("Green Val: " + greenValue);
 
-                mCallback.SendMessage("0," + redValue + "," + greenValue + "," + blueValue + "," + brightnessValue + "\n");
+                mCallback.SendMessage("1," + redValue + "," + greenValue + "," + blueValue + "," + brightnessValue + "\n");
 
 
             }
@@ -183,7 +183,7 @@ public class MixerFragment extends Fragment {
 
                 textViewBrightness.setText("Brightness: " + brightnessValue);
 
-                mCallback.SendMessage("0," + redValue + "," + greenValue + "," + blueValue + "," + brightnessValue + "\n");
+                mCallback.SendMessage("1," + redValue + "," + greenValue + "," + blueValue + "," + brightnessValue + "\n");
 
 
 
