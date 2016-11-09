@@ -17,9 +17,13 @@ import android.widget.TextView;
 public class TouchFragment extends Fragment {
     public int x= 0;
     public int y= 0;
+    public int serialVal = 6; //This changes how frequently the serial output is sent, instead of every 1 color val change.
     public int redValue = 0;
     public int blueValue = 0;
     public int greenValue = 0;
+    public int oldRedValue = serialVal;
+    public int oldBlueValue = serialVal;
+    public int oldGreenValue = serialVal;
     public int brightnessVal = 100;
     private ImageView touchControl;
     private ImageView RGBColorView2;
@@ -31,7 +35,7 @@ public class TouchFragment extends Fragment {
 
     // Container Activity must implement this interface
     public interface TouchValuesChanged {
-        public void SendMessage(String messageToSend);
+        void SendMessage(String messageToSend);
     }
 
 
@@ -101,21 +105,35 @@ public class TouchFragment extends Fragment {
                                 final int blueValue = Color.blue(pixel);
                                 final int greenValue = Color.green(pixel);
                                 if (redValue!=0 && blueValue !=0 && greenValue!=0) {
+
+
+                                    if (Math.abs(redValue - oldRedValue) >= serialVal || Math.abs(blueValue - oldBlueValue) >= serialVal||  Math.abs(greenValue - oldGreenValue) >= serialVal){
+                                        //
                                         mCallback.SendMessage("1," + redValue + "," + greenValue + "," + blueValue + "," + 100 + "\n");
+                                        //Reset old colors to new colors
+                                        oldRedValue = redValue;
+                                        oldBlueValue = blueValue;
+                                        oldGreenValue = greenValue;
+                                    }
+
+                                    //Changes UI in a background thread within worker thread.
+                                    RGBColorView2.post(new Runnable() {
+                                        public void run() {
+                                            RGBColorView2.setBackgroundColor(Color.rgb(redValue, greenValue, blueValue));
+                                        }
+                                    });
+
+                                    rgbVals.post(new Runnable() {
+                                        public void run() {
+                                            rgbVals.setText("Red: "+ redValue + " Green: " + greenValue + " Blue: " + blueValue);
+                                        }
+                                    });
+
+
+
+
                                 }
 
-                                //Changes UI in a background thread within worker thread.
-                                RGBColorView2.post(new Runnable() {
-                                    public void run() {
-                                        RGBColorView2.setBackgroundColor(Color.rgb(redValue, greenValue, blueValue));
-                                    }
-                                });
-
-                                rgbVals.post(new Runnable() {
-                                    public void run() {
-                                        rgbVals.setText("Red: "+ redValue + " Green: " + greenValue + " Blue: " + blueValue);
-                                    }
-                                });
 
 
 

@@ -13,7 +13,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 /**
- * Created by anupamchugh on 10/12/15.
+ * Created by Vignesh Murugan on 10/12/15.
  */
 public class MixerFragment extends Fragment {
 
@@ -28,10 +28,15 @@ public class MixerFragment extends Fragment {
     private TextView textViewBrightness;
     private ImageView RGBColorView;
 
+    public int serialVal = 5; //This changes how frequently the serial output is sent, instead of every 1 val change.
     public int redValue = 0;
     public int blueValue = 0;
     public int greenValue = 0;
     public int brightnessValue = 0;
+    public int oldRedValue = serialVal;
+    public int oldBlueValue = serialVal;
+    public int oldGreenValue = serialVal;
+    public int oldbrightnessValue = serialVal;
 
     public MixerFragment() {
     }
@@ -40,7 +45,7 @@ public class MixerFragment extends Fragment {
 
     // Container Activity must implement this interface
     public interface ValuesChanged {
-        public void SendMessage(String messageToSend);
+        void SendMessage(String messageToSend);
     }
 
 
@@ -90,11 +95,13 @@ public class MixerFragment extends Fragment {
             public void onProgressChanged(SeekBar seekBar, int progressR, boolean fromUser) {
                 redValue = progressR;
                 RGBColorView.setBackgroundColor(Color.argb(brightnessValue,redValue, greenValue, blueValue ));
-                brightnessValue = Math.round ((((float) brightnessValue) / 255) * 100);
-                textViewRed.setText("Red Val: " + redValue);
+                //brightnessValue = Math.round ((((float) brightnessValue) / 255) * 100);
+                textViewRed.setText("Red: " + redValue);
 
-                mCallback.SendMessage("1," + redValue + "," + greenValue + "," + blueValue + "," + brightnessValue + "\n");
-
+                if (Math.abs(oldRedValue - redValue) >= serialVal ){
+                    mCallback.SendMessage("1," + redValue + "," + greenValue + "," + blueValue + "," + brightnessValue + "\n");
+                    oldRedValue = redValue;
+                }
 
             }
 
@@ -122,11 +129,13 @@ public class MixerFragment extends Fragment {
             public void onProgressChanged(SeekBar seekBar, int progressB, boolean fromUser) {
                 blueValue = progressB;
                 RGBColorView.setBackgroundColor(Color.argb(brightnessValue,redValue, greenValue, blueValue ));
-                brightnessValue = Math.round ((((float) brightnessValue) / 255) * 100);
-                textViewBlue.setText("Blue Val: " + blueValue);
+                //brightnessValue = Math.round ((((float) brightnessValue) / 255) * 100);
+                textViewBlue.setText("Blue: " + blueValue);
 
-                mCallback.SendMessage("1," + redValue + "," + greenValue + "," + blueValue + "," + brightnessValue + "\n");
-
+                if (Math.abs(oldBlueValue - blueValue) >= serialVal ){
+                    mCallback.SendMessage("1," + redValue + "," + greenValue + "," + blueValue + "," + brightnessValue + "\n");
+                    oldBlueValue = blueValue;
+                }
 
             }
 
@@ -150,11 +159,13 @@ public class MixerFragment extends Fragment {
             public void onProgressChanged(SeekBar seekBar, int progressG, boolean fromUser) {
                 greenValue = progressG;
                 RGBColorView.setBackgroundColor(Color.argb(brightnessValue,redValue, greenValue, blueValue ));
-                brightnessValue = Math.round ((((float) brightnessValue) / 255) * 100);
-                textViewGreen.setText("Green Val: " + greenValue);
+                //brightnessValue = Math.round ((((float) brightnessValue) / 255) * 100);
+                textViewGreen.setText("Green: " + greenValue);
 
-                mCallback.SendMessage("1," + redValue + "," + greenValue + "," + blueValue + "," + brightnessValue + "\n");
-
+                if (Math.abs(greenValue - oldGreenValue) >= serialVal ){
+                    mCallback.SendMessage("1," + redValue + "," + greenValue + "," + blueValue + "," + brightnessValue + "\n");
+                    oldGreenValue = greenValue;
+                }
 
             }
 
@@ -183,9 +194,12 @@ public class MixerFragment extends Fragment {
 
                 textViewBrightness.setText("Brightness: " + brightnessValue);
 
-                mCallback.SendMessage("1," + redValue + "," + greenValue + "," + blueValue + "," + brightnessValue + "\n");
 
 
+                if (Math.abs(brightnessValue - oldbrightnessValue) >= serialVal ){
+                    mCallback.SendMessage("1," + redValue + "," + greenValue + "," + blueValue + "," + brightnessValue + "\n");
+                    oldbrightnessValue = brightnessValue;
+                }
 
 
             }
