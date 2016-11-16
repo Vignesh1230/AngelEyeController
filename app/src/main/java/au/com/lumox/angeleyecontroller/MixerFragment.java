@@ -28,11 +28,11 @@ public class MixerFragment extends Fragment {
     private TextView textViewBrightness;
     private ImageView RGBColorView;
 
-    public int serialVal = 5; //This changes how frequently the serial output is sent, instead of every 1 val change.
+    public int serialVal = 8; //This changes how frequently the serial output is sent, instead of every 1 val change.
     public int redValue = 0;
     public int blueValue = 0;
     public int greenValue = 0;
-    public int brightnessValue = 0;
+    public int brightnessValue = 255;
     public int oldRedValue = serialVal;
     public int oldBlueValue = serialVal;
     public int oldGreenValue = serialVal;

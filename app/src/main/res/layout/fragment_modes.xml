@@ -25,8 +25,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/tabHost"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true">
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -50,29 +50,16 @@
                     android:orientation="vertical"
                     android:weightSum="1">
 
-                    <ImageButton
-                        android:layout_width="150dp"
-                        android:layout_height="100dp"
-                        android:id="@+id/modeCol1_1"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginTop="10dp" />
+                    <ScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scrollbarStyle="insideInset">
 
-                    <ImageButton
-                        android:layout_width="150dp"
-                        android:layout_height="100dp"
-                        android:id="@+id/modeCol1_2"
-                        android:layout_marginLeft="210dp"
-                        android:layout_marginTop="-100dp" />
-
-                    <EditText
-                        android:layout_width="141dp"
-                        android:layout_height="wrap_content"
-                        android:inputType="numberDecimal"
-                        android:ems="10"
-                        android:id="@+id/editText"
-                        android:layout_marginLeft="24dp"
-                        android:text="20"/>
-
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical" />
+                    </ScrollView>
                 </LinearLayout>
 
                 <LinearLayout

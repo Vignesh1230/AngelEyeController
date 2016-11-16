@@ -17,7 +17,7 @@ import android.widget.TextView;
 public class TouchFragment extends Fragment {
     public int x= 0;
     public int y= 0;
-    public int serialVal = 6; //This changes how frequently the serial output is sent, instead of every 1 color val change.
+    public int serialVal = 8; //This changes how frequently the serial output is sent, instead of every 1 color val change.
     public int redValue = 0;
     public int blueValue = 0;
     public int greenValue = 0;

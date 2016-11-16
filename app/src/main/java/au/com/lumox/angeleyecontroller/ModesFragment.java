@@ -23,7 +23,7 @@ public class ModesFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.fragment_modes, container, false);
 
-        mode1_1 = (ImageButton) rootView.findViewById(R.id.modeCol1_1);
+        //mode1_1 = (ImageButton) rootView.findViewById(R.id.modeCol1_1);
 
         //final ColorPickerView picker = new ColorPickerView(getContext());
 
